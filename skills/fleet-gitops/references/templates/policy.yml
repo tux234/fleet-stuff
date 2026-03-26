@@ -1,0 +1,25 @@
+# platforms/<platform>/policies/<policy-name>.yml — Policy definition
+
+name: Disk encryption enabled (macOS)
+description: Checks if FileVault disk encryption is enabled.
+resolution: >-
+  To enable disk encryption, go to System Settings > Privacy & Security > FileVault
+  and turn on FileVault.
+query: >-
+  SELECT 1 FROM disk_encryption
+  WHERE user_uuid IS NOT '' AND filevault_status = 'on'
+  LIMIT 1;
+platform: darwin      # darwin, windows, linux, or omit for all
+critical: false
+
+# Label targeting (optional)
+# labels_include_any:
+#   - "Department: Engineering"
+# labels_exclude_any:
+#   - "Virtual Machines"
+
+# Policy automations (fleet/unassigned ONLY — not global)
+# install_software:
+#   package_path: ../software/filevault-enabler.yml
+# run_script:
+#   path: ../scripts/enable-filevault.sh

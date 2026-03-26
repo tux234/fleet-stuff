@@ -1,0 +1,60 @@
+# Source: Apple device-management repo
+# https://github.com/apple/device-management/blob/release/mdm/profiles/CommonPayloadKeys.yaml
+# Copied for offline reference — check source for updates
+
+title: Common Payload Keys
+description: Properties common to ALL payload dictionaries (inner payloads).
+
+required_keys:
+  - key: PayloadIdentifier
+    type: <string>
+    presence: required
+    notes: >
+      Reverse-DNS style. Usually same as TopLevel PayloadIdentifier
+      with an additional appended component. Must be unique within profile.
+      System uses PayloadIdentifier + PayloadUUID pair to match payloads
+      during profile replacement.
+
+  - key: PayloadUUID
+    type: <string>
+    presence: required
+    notes: >
+      Globally unique. Generate with `uuidgen`.
+      Used with PayloadIdentifier for payload matching during replacement.
+
+  - key: PayloadType
+    type: <string>
+    presence: required
+    notes: >
+      The payload type — each payload domain's reference page specifies
+      the value (e.g., com.apple.Safari, com.apple.security.firewall).
+
+  - key: PayloadVersion
+    type: <integer>
+    presence: required
+    allowed_values: [1]
+    notes: >
+      REQUIRED on every payload. This is the single most commonly
+      forgotten field — causes "missing PayloadVersion" validation errors.
+
+optional_keys:
+  - key: PayloadDescription
+    type: <string>
+    notes: Human-readable description shown on Detail screen.
+
+  - key: PayloadDisplayName
+    type: <string>
+    notes: Human-readable name, doesn't need to be unique.
+
+  - key: PayloadOrganization
+    type: <string>
+    notes: >
+      Organization name. Doesn't need to match the enclosing
+      profile's PayloadOrganization.
+
+platform_support:
+  iOS: "4.0+"
+  macOS: "10.7+"
+  tvOS: "9.0+"
+  visionOS: "1.0+"
+  watchOS: "1.0+"

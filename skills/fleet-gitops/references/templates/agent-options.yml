@@ -1,0 +1,22 @@
+# platforms/all/agent-options.yml — Shared agent options
+# Referenced from YAML as object (no dash): agent_options: {path: ./platforms/all/agent-options.yml}
+
+config:
+  decorators:
+    load:
+      - "SELECT uuid AS host_uuid FROM system_info;"
+      - "SELECT hostname AS hostname FROM system_info;"
+  options:
+    disable_distributed: false
+    distributed_interval: 10
+    distributed_plugin: tls
+    distributed_tls_max_attempts: 3
+    logger_tls_endpoint: /api/osquery/log
+    logger_tls_period: 10
+    pack_delimiter: /
+
+# Optional: update channels for orbit/osqueryd/desktop
+# update_channels:
+#   osqueryd: stable
+#   orbit: stable
+#   desktop: stable

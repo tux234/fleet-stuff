@@ -1,0 +1,26 @@
+# labels/<label-name>.yml — Label definition
+# Labels can be: dynamic (SQL query), manual (host list), or host_vitals
+
+# Dynamic label (default)
+name: "Department: Engineering"
+description: "Hosts belonging to the Engineering department"
+query: >-
+  SELECT 1 FROM mdm_bridge
+  WHERE department = 'Engineering'
+  OR group_name LIKE '%Engineering%';
+platform: ""   # empty = all platforms. Options: darwin, windows, ubuntu, centos
+
+# --- Alternative: Manual label ---
+# name: "VIP Devices"
+# label_membership_type: manual
+# hosts:
+#   - hardware_serial: C02ABC123DEF    # Preferred identifier
+#   - uuid: 392547dc-0000-0000-a87a-d701ff75bc65
+#   # NOTE: hostname is DEPRECATED — use hardware_serial or uuid
+
+# --- Alternative: Host vitals label ---
+# name: "Low Disk Space"
+# label_membership_type: host_vitals
+# criteria:
+#   vital: disk_space
+#   value: "32"   # GB threshold

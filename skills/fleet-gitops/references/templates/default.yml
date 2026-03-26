@@ -1,0 +1,34 @@
+# default.yml — Global org settings
+# All keys are required. Missing keys silently reset to defaults or delete resources.
+# Paths are relative to this file.
+
+agent_options:
+  path: ./platforms/all/agent-options.yml
+
+org_settings:
+  features:
+    enable_host_users: true
+    enable_software_inventory: true
+  fleet_desktop:
+    transparency_url: https://fleetdm.com/transparency
+  host_expiry_settings:
+    host_expiry_enabled: false
+  org_info:
+    org_name: CHANGEME
+    contact_url: https://support.example.com
+  secrets:
+    - secret: $ENROLL_SECRET
+  server_settings:
+    server_url: https://fleet.example.com
+
+# Required — omit key entirely to leave unchanged, include empty to clear all
+policies:
+reports:
+controls:
+  scripts: []
+  macos_settings:
+    custom_settings: []
+  windows_settings:
+    custom_settings: []
+software:
+labels:

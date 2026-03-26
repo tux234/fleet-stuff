@@ -1,0 +1,105 @@
+# Source: Apple device-management repo
+# https://github.com/apple/device-management/blob/release/mdm/profiles/TopLevel.yaml
+# Copied for offline reference — check source for updates
+
+title: Top Level
+description: The top-level payload properties for all profiles.
+
+required_keys:
+  - key: PayloadIdentifier
+    type: <string>
+    presence: required
+    notes: >
+      Reverse-DNS style (e.g., com.example.myprofile).
+      System uses this to determine replace vs. add.
+
+  - key: PayloadUUID
+    type: <string>
+    presence: required
+    notes: >
+      Globally unique. Generate with `uuidgen` on macOS.
+
+  - key: PayloadType
+    type: <string>
+    presence: required
+    allowed_values: [Configuration]
+    notes: The only supported value is "Configuration".
+
+  - key: PayloadVersion
+    type: <integer>
+    presence: required
+    allowed_values: [1]
+    notes: Must be integer 1. Represents profile format version.
+
+  - key: PayloadContent
+    type: <array>
+    presence: required
+    notes: >
+      Array of payload dictionaries. Not needed if IsEncrypted is true.
+
+optional_keys:
+  - key: PayloadDescription
+    type: <string>
+    notes: Shown on the Detail screen. Make detailed enough for install decision.
+
+  - key: PayloadDisplayName
+    type: <string>
+    notes: Human-readable name, doesn't need to be unique.
+
+  - key: PayloadOrganization
+    type: <string>
+    notes: Organization name.
+
+  - key: PayloadRemovalDisallowed
+    type: <boolean>
+    default: false
+    notes: >
+      If true, user can't delete without removal password.
+      macOS 10.15+: only affects manually installed profiles.
+      iOS: requires supervised device.
+
+  - key: PayloadScope
+    type: <string>
+    allowed_values: [System, User]
+    supported: macOS 10.8+
+    notes: Install for system or user. Affects cert keychain location.
+
+  - key: RemovalDate
+    type: <date>
+    notes: Auto-remove profile on this date.
+
+  - key: DurationUntilRemoval
+    type: <real>
+    notes: Seconds until auto-removal. RemovalDate takes precedence if earlier.
+
+  - key: PayloadExpirationDate
+    type: <date>
+    notes: When profile is no longer valid; system shows update button.
+
+  - key: TargetDeviceType
+    type: <integer>
+    default: 0
+    allowed_values:
+      0: Any/unspecified
+      1: iPhone/iPad/iPod Touch
+      2: Apple Watch
+      3: HomePod
+      4: Apple TV
+      5: Mac
+      6: Vision Pro
+    supported: iOS 12.2+, macOS 10.15+, tvOS 12.2+, visionOS 1.1+, watchOS 5.2+
+    notes: Prevents unintended installations on wrong platform.
+
+  - key: ConsentText
+    type: <dictionary>
+    notes: >
+      Localized agreement text. Keys are IETF BCP 47 language codes.
+      System displays before install; user must agree.
+      Provide a "default" key for fallback.
+
+platform_support:
+  iOS: "4.0+"
+  macOS: "10.7+"
+  tvOS: "9.0+"
+  visionOS: "1.0+"
+  watchOS: "1.0+"

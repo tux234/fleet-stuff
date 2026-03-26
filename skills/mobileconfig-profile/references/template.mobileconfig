@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<!--
+  Mobileconfig Profile Template
+
+  Usage:
+    1. Copy and rename this file
+    2. Replace all PLACEHOLDER_ values
+    3. Generate fresh UUIDs: run `uuidgen` in Terminal for each one
+    4. Set PayloadType in inner dicts to the preference domain
+    5. Validate: plutil -lint YourProfile.mobileconfig
+-->
+<dict>
+  <!-- === OUTER PROFILE (wrapper) === -->
+
+  <key>PayloadDisplayName</key>
+  <string>PLACEHOLDER_PROFILE_NAME</string>
+
+  <key>PayloadDescription</key>
+  <string>PLACEHOLDER_DESCRIPTION</string>
+
+  <key>PayloadIdentifier</key>
+  <!-- Format: com.<org>.profiles.<descriptive-name> -->
+  <string>com.fleetdm.profiles.PLACEHOLDER_PROFILE_NAME</string>
+
+  <key>PayloadOrganization</key>
+  <string>Fleet</string>
+
+  <key>PayloadUUID</key>
+  <!-- Generate: uuidgen -->
+  <string>PLACEHOLDER_UUID_OUTER</string>
+
+  <key>PayloadType</key>
+  <!-- Always "Configuration" for outer profile -->
+  <string>Configuration</string>
+
+  <key>PayloadVersion</key>
+  <!-- Always integer 1 — NEVER use <real> -->
+  <integer>1</integer>
+
+  <key>PayloadScope</key>
+  <!-- "System" (device-level) or "User" (user-level) -->
+  <string>System</string>
+
+  <key>PayloadRemovalDisallowed</key>
+  <true/>
+
+  <key>PayloadContent</key>
+  <array>
+
+    <!-- === INNER PAYLOAD 1 === -->
+    <dict>
+      <key>PayloadDisplayName</key>
+      <string>PLACEHOLDER_PAYLOAD_NAME</string>
+
+      <key>PayloadIdentifier</key>
+      <!-- Format: com.<org>.profiles.<profile-name>.<this-payload-uuid> -->
+      <string>com.fleetdm.profiles.PLACEHOLDER_PROFILE_NAME.PLACEHOLDER_UUID_INNER_1</string>
+
+      <key>PayloadType</key>
+      <!-- The preference domain, e.g. com.apple.Safari, com.google.Chrome -->
+      <string>PLACEHOLDER_PAYLOAD_TYPE</string>
+
+      <key>PayloadUUID</key>
+      <string>PLACEHOLDER_UUID_INNER_1</string>
+
+      <key>PayloadVersion</key>
+      <!-- REQUIRED on every payload — this is the #1 most forgotten field -->
+      <integer>1</integer>
+
+      <!-- Your managed keys below -->
+
+    </dict>
+
+  </array>
+</dict>
+</plist>

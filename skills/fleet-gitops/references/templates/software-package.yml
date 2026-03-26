@@ -1,0 +1,32 @@
+# platforms/<platform>/software/<app-name>.yml — Software package definition
+# Referenced from fleet YAML: packages: [{path: ../platforms/macos/software/this-file.yml}]
+# Fleet-level keys (self_service, categories, labels_*) go in the fleet YAML, NOT here.
+
+url: https://download-installer.cdn.mozilla.net/pub/firefox/releases/latest/mac/en-US/Firefox.dmg
+
+# Optional: skip re-download if hash matches existing package
+# hash_sha256: abc123...
+
+# Optional: custom display name (v4.81+)
+# display_name: "Mozilla Firefox"
+
+# Install script (required for custom packages)
+install_script:
+  path: ../scripts/install-firefox.sh
+
+# Uninstall script (required for custom packages)
+uninstall_script:
+  path: ../scripts/uninstall-firefox.sh
+
+# Optional: only install if this query returns results
+# pre_install_query: >-
+#   SELECT 1 FROM apps WHERE name = 'Firefox.app'
+#   AND version_compare(bundle_short_version, '130.0') < 0;
+
+# Optional: run after successful install
+# post_install_script:
+#   path: ../scripts/post-install-firefox.sh
+
+# Optional: custom icon (square PNG, 120x120 to 1024x1024)
+# icon:
+#   path: ../../all/icons/firefox-icon.png

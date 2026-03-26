@@ -1,0 +1,16 @@
+# platforms/<platform>/queries/<report-name>.yml — Report (query) definition
+# Renamed from "queries" to "reports" in v4.82
+
+name: Collect operating system information
+description: Collects OS name, version, and build for all hosts.
+query: >-
+  SELECT name, version, build, platform
+  FROM os_version;
+platform: ""           # empty = all platforms
+interval: 3600         # seconds between runs (0 = manual only)
+observer_can_run: true
+automations_enabled: false
+
+# Label targeting (optional)
+# labels_include_any:
+#   - "Department: Engineering"
